@@ -7,19 +7,7 @@ from django.contrib.auth import authenticate, login as logn,logout as auth_logou
 from django.contrib.auth.models import User
 from .forms import SignUpForm,LoginForm
 ADMIN_USERS = 'admin'
-# # Create your views here.
-# def login(request):
-#     frm=UserForm
-#     if request.POST:
-#         frm=UserForm(request.POST)
-#         if frm.is_valid:
-#             frm.save()
-#             return redirect('login')
-#         else:
-#             frm=UserForm
-#     return render(request,'login.html',{'frm':frm})
-#     # frm=UserForm
-#     # return render(request,'login.html',{frm:'frm'})
+
 
 def user_login(request):
     if request.user.is_authenticated:
@@ -35,9 +23,6 @@ def user_login(request):
             if user.username in ADMIN_USERS:
                 logn(request, user)
                 return redirect('view')
-        # if user: #is not None:
-        #     print(user)
-                #logn(request, user)
             else:
                 logn(request, user)
                 return redirect('dashboard')
