@@ -9,7 +9,7 @@ from .forms import SignUpForm,LoginForm
 ADMIN_USERS = 'admin'
 
 
-def user_login(request):
+def user_login(request): # login function here.
     if request.user.is_authenticated:
         return redirect('dashboard')
     frm=LoginForm
@@ -34,13 +34,13 @@ def user_login(request):
 
     
 @login_required
-def logout(request):
+def logout(request):  # logout function here.
     auth_logout(request)
     return redirect("login")
 
-def user_signup(request):
+def user_signup(request):  # signup function here.
     if request.user.is_authenticated:
-        return redirect('view')
+        return redirect('dashboard')
     if request.method == 'POST':
         frm = SignUpForm(request.POST)
         if frm.is_valid():

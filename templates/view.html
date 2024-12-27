@@ -147,9 +147,9 @@
         <table class="password-table">
             <thead>
                 <tr>
-                    <th>Site</th>
-                    <th>Link</th>
+                    <th>Username</th>
                     <th>Password</th>
+                    <th>Website</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -157,8 +157,8 @@
                 {% for password in passwords %}
                 <tr>
                     <td>{{ password.name }}</td>
-                    <td>{{ password.link }}</td>
                     <td>{{ password.password }}</td>
+                    <td>{{ password.link }}</td>
                     <td class="action-links">
                         <a href="{% url 'delete' password.id %}">Delete</a>
                         <a href="{% url 'edit' password.id %}">Edit</a>

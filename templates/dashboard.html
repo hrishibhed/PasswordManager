@@ -161,17 +161,17 @@
         <table class="password-table">
             <thead>
                 <tr>
-                    <th>Site</th>
-                    <th>Name</th>
+                    <th>UserName</th>
                     <th>Password</th>
+                    <th>Website</th>
                 </tr>
             </thead>
             <tbody>
                 {% for pass in user_pass %}
                 <tr>
                     <td>{{ pass.name }}</td>
-                    <td>{{ pass.link }}</td>
                     <td>{{ pass.password }}</td>
+                    <td>{{ pass.link }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
