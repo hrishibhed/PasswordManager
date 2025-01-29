@@ -88,7 +88,7 @@ import os
 #         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
 #         'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
 #         'PORT': '3306',
-#     }
+#     } 
 # }
 DATABASES = {
     'default': {
