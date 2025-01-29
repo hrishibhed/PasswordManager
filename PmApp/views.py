@@ -46,12 +46,14 @@ def edit(request, pk):
 from django.contrib import messages
 @login_required(login_url='login')
 def view(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated & request.user.is_superuser:
         passwords=Passwd.objects.all()
         response = render(request,'view.html',{'passwords':passwords})
         #respo.set_cookie('visits',visits)
         return response
-
+    else:
+        messages.error(request, f"Access Denied for {request.user}")
+        return redirect('dashboard')
 
 
 @login_required(login_url='login')
@@ -64,7 +66,6 @@ def delete(request,pk):
 
 @login_required(login_url='login') # Redirect to login if not authenticated
 def dashboard(request):
-    messages.success(request, f"Logged in as {request.user}")
     user_pass = Passwd.objects.filter(userid=request.user)
     return render(request, 'dashboard.html', {'user_pass': user_pass})
 
