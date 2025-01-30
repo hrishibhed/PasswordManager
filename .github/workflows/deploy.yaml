@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-# jobs:
+jobs:
 #   test:
 #     name: Run Django Tests
 #     runs-on: ubuntu-latest
