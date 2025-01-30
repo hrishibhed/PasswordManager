@@ -1,23 +1,45 @@
-# Use an appropriate base image
-FROM python:3.9-slim
+# FROM python:3.10-slim
+# ENV PYTHONDONTWRITEBYTECODE=1 
+# ENV PYTHONUNBUFFERED=1         
+# WORKDIR /app
+# COPY requirements.txt /app/
+# RUN pip install --upgrade pip && pip install -r requirements.txt
+# COPY . /app/
+# RUN python3 manage.py makemigrations
+# RUN python3 manage.py migrate
 
-# Install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    default-libmysqlclient-dev \
-    pkg-config \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
+# EXPOSE 8000
+# ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+FROM python:3.10-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 
+ENV PYTHONUNBUFFERED=1         
 
 # Set the working directory
 WORKDIR /app
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy project files
-COPY . .
+# Copy requirements file and install dependencies
+COPY requirements.txt /app/
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
-# Command to run your application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Copy the entire project
+COPY . /app/
+
+# Run migrations
+RUN python3 manage.py makemigrations
+RUN python3 manage.py migrate
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Run the application
+ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8000"]
