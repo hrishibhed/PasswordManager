@@ -222,13 +222,5 @@
         // Generate an initial password when the page loads
         document.addEventListener('DOMContentLoaded', updatePassword);
     </script>
-
-{% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
 </body>
 </html>
