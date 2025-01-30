@@ -45,7 +45,7 @@ jobs:
           IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:${{ github.sha }}
         run: |
           docker build -t $IMAGE_NAME .
-          docker push $IMAGE_NAME
+          docker push $IMAGE_NAME            #first test
 
       - name: Install DigitalOcean CLI
         run: |
@@ -65,3 +65,4 @@ jobs:
         run: |
           kubectl set image deployment/django-app django-app=$IMAGE_NAME --namespace=default
           kubectl rollout status deployment/django-app --namespace=default
+
