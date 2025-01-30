@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-jobs:
+
 #   test:
 #     name: Run Django Tests
 #     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
 #       - name: Run Tests
 #         run: |
 #           python manage.py test
-
+jobs:
   build-and-deploy:
     name: Build and Deploy to DigitalOcean Kubernetes
     runs-on: ubuntu-latest
